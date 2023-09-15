@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>windows upgrading</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./loading.css">
+  </head>
+  <body>
+    <div id='controls'>
+      <a href="https://github.com/ppz-pro/windows-upgrading">Github</a>
+    </div>
+    <div id='windows_upgrading'>
+      <i>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </i>
+      <div class="text">
+        <div>正在准备 Windows</div>
+        <div>请不要关闭你的计算机</div>
+      </div>
+    </div>
+    
+    <script>
+      const $ = new Proxy(function() {}, { // 假 jQuery
+        get(_, tagname) {
+          return (props, ...children) => {
+            const result = document.createElement(tagname)
+            for(const key in props) {
+              switch(key) {
+                case 'onclick':
+                  result.addEventListener('click', props[key])
+                  break
+                default:
+                  result[key] = props[key]
+              }
+            }
+            if (children.length)
+              result.append(...children)
+            return result
+          }
+        },
+        apply(proxied, that, [selector]) {
+          return document.querySelector(selector)
+        }
+      })
+
+      // main
+      $('#controls').prepend(
+        $.button({ onclick: fullscreen }, '全屏')
+      )
+
+      /** functions */
+      function debug(target) {
+        console.debug(target)
+        return target
+      }
+      function fullscreen() {
+        $('#windows_upgrading').requestFullscreen()
+      }
+    </script>
+  </body>
+</html>

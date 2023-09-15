@@ -1,0 +1,11 @@
+body {
+  width: min(1000px, calc(100vw - 20px));
+  margin: 2rem auto;
+}
+#controls {
+  display: flex;
+  margin-bottom: 1rem;
+}
+#controls > a:first-of-type {
+  margin-left: auto;
+}
